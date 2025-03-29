@@ -656,19 +656,19 @@ local animationIdsToStop = {
 
 
 local replacementAnimations = {
-
-    ["17325510002"] = "rbxassetid://17889458563", --punch1
-
-    ["17325513870"] = "rbxassetid://17889461810", --punch2
-
-    ["17325522388"] = "rbxassetid://17889471098", --punch3
-
-    ["17325537719"] = "rbxassetid://17889290569", --punch4
-
+ 
+    ["10469493270"] = "rbxassetid://17889458563", --punch1
+ 
+    ["10469630950"] = "rbxassetid://17889461810", --punch2
+ 
+    ["10469639222"] = "rbxassetid://17889471098", --punch3
+ 
+    ["10469643643"] = "rbxassetid://17889290569", --punch4
+ 
     ["17859015788"] = "rbxassetid://12684185971", --downslam finisher
-
+ 
     ["11365563255"] = "rbxassetid://14516273501" --punch idk
-
+ 
 }
 
 
