@@ -1153,13 +1153,16 @@ Anim.TimePosition = startTime
 Anim:AdjustSpeed(1)
 
 --[[END OF EXECUTE ANIMS]]
---[[Vanishing speed]]
-local baseButton = hotbarFrame:FindFirstChild("5").Base
-local ToolName = baseButton.ToolName
+local Tool1 = Instance.new("Tool")
+Tool1.Name = "VanishingSpeed"
+Tool1.RequiresHandle = true
+Tool1.Parent = game.Players.LocalPlayer.Backpack
 
-ToolName.Text = "Vanishing Speed"
+local Tool2 = Instance.new("Tool")
+Tool2.Name = "NoMoreRunning"
+Tool2.RequiresHandle = true
+Tool2.Parent = game.Players.LocalPlayer.Backpack
 
-local Tool = script.Parent
 local character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 local camera = game.Workspace.CurrentCamera
@@ -1167,7 +1170,7 @@ local camera = game.Workspace.CurrentCamera
 local movingConnection
 local Anim
 
-Tool.Equipped:Connect(function()
+Tool1.Equipped:Connect(function()
     local AnimAnim = Instance.new("Animation")
     AnimAnim.AnimationId = "rbxassetid://18897115785"
     Anim = humanoid:LoadAnimation(AnimAnim)
@@ -1190,7 +1193,7 @@ Tool.Equipped:Connect(function()
     end)
 end)
 
-Tool.Unequipped:Connect(function()
+Tool1.Unequipped:Connect(function()
     if movingConnection then
         movingConnection:Disconnect()
     end
@@ -1200,20 +1203,8 @@ Tool.Unequipped:Connect(function()
     end
 end)
 
---[[No more running]]
-local baseButton2 = hotbarFrame:FindFirstChild("6").Base
-local ToolName2 = baseButton2.ToolName
-
-ToolName2.Text = "No more running anymore"
-
-local Tool2 = script.Parent
-local player = game.Players.LocalPlayer
-local character2 = player.Character or player.CharacterAdded:Wait()
-local humanoid2 = character2:WaitForChild("Humanoid")
-
-local camera2 = game.Workspace.CurrentCamera
-
 Tool2.Equipped:Connect(function()
+    local player = game.Players.LocalPlayer
     local closestPlayer = nil
     local closestDistance = math.huge
     
@@ -1223,7 +1214,7 @@ Tool2.Equipped:Connect(function()
             local otherHumanoidRootPart = otherCharacter:FindFirstChild("HumanoidRootPart")
             
             if otherHumanoidRootPart then
-                local distance = (character2.HumanoidRootPart.Position - otherHumanoidRootPart.Position).Magnitude
+                local distance = (character.HumanoidRootPart.Position - otherHumanoidRootPart.Position).Magnitude
                 
                 if distance < closestDistance then
                     closestDistance = distance
@@ -1241,8 +1232,7 @@ Tool2.Equipped:Connect(function()
             local armPosition = closestCharacter:FindFirstChild("RightUpperArm") and closestCharacter.RightUpperArm.Position or closestHumanoidRootPart.Position
             local teleportPosition = closestHumanoidRootPart.Position - (closestHumanoidRootPart.Position - armPosition).unit * 5
 
-            character2:SetPrimaryPartCFrame(CFrame.new(teleportPosition))
+            character:SetPrimaryPartCFrame(CFrame.new(teleportPosition))
         end
     end
 end)
-
