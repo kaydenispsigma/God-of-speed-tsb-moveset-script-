@@ -1,0 +1,45 @@
+-- VanishingSpeed Tool
+local Tool1 = Instance.new("Tool")
+Tool1.Name = "VanishingSpeed"
+Tool1.RequiresHandle = true
+Tool1.Parent = game.Players.LocalPlayer.Backpack
+
+local character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local camera = game.Workspace.CurrentCamera
+
+local movingConnection
+local Anim
+
+Tool1.Equipped:Connect(function()
+    local AnimAnim = Instance.new("Animation")
+    AnimAnim.AnimationId = "rbxassetid://18897115785"
+    Anim = humanoid:LoadAnimation(AnimAnim)
+
+    local startTime = 0.3
+    Anim:Play()
+    Anim:AdjustSpeed(0)
+    Anim.TimePosition = startTime
+    Anim:AdjustSpeed(1)
+
+    delay(1.8, function()
+        Anim:Stop()
+    end)
+
+    humanoid.WalkSpeed = 50
+
+    movingConnection = game:GetService("RunService").Heartbeat:Connect(function()
+        local direction = (camera.CFrame.LookVector * Vector3.new(1, 0, 1)).unit
+        humanoid:Move(direction * humanoid.WalkSpeed * 0.1)
+    end)
+end)
+
+Tool1.Unequipped:Connect(function()
+    if movingConnection then
+        movingConnection:Disconnect()
+    end
+    humanoid.WalkSpeed = 16
+    if Anim then
+        Anim:Stop()
+    end
+end)
