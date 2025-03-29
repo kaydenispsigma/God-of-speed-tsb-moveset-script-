@@ -485,7 +485,7 @@ end
 
 local AnimAnim = Instance.new("Animation")
 
-AnimAnim.AnimationId = "rbxassetid://15938993207"
+AnimAnim.AnimationId = "rbxassetid://13294790250"
 
 local Anim = Humanoid:LoadAnimation(AnimAnim)
 
@@ -657,13 +657,13 @@ local animationIdsToStop = {
 
 local replacementAnimations = {
 
-    ["18715994424"] = "rbxassetid://17889458563", --punch1
+    ["17325510002"] = "rbxassetid://17889458563", --punch1
 
-    ["18715998497"] = "rbxassetid://17889461810", --punch2
+    ["17325513870"] = "rbxassetid://17889461810", --punch2
 
-    ["18715999597"] = "rbxassetid://17889471098", --punch3
+    ["17325522388"] = "rbxassetid://17889471098", --punch3
 
-    ["18716001119"] = "rbxassetid://17889290569", --punch4
+    ["17325537719"] = "rbxassetid://17889290569", --punch4
 
     ["17859015788"] = "rbxassetid://12684185971", --downslam finisher
 
@@ -1153,9 +1153,7 @@ Anim.TimePosition = startTime
 Anim:AdjustSpeed(1)
 
 --[[END OF EXECUTE ANIMS]]
-
 --[[Vanishing speed]]
-
 local baseButton = hotbarFrame:FindFirstChild("5").Base
 local ToolName = baseButton.ToolName
 
@@ -1196,28 +1194,26 @@ Tool.Unequipped:Connect(function()
     if movingConnection then
         movingConnection:Disconnect()
     end
-    humanoid.WalkSpeed = 16  -- Reset walk speed to default when tool is unequipped
+    humanoid.WalkSpeed = 16
     if Anim then
-        Anim:Stop()  -- Stop the animation when the tool is unequipped
+        Anim:Stop()
     end
 end)
 
---[[END OF CREATION OF VANISHING SPEED]]
 --[[No more running]]
+local baseButton2 = hotbarFrame:FindFirstChild("6").Base
+local ToolName2 = baseButton2.ToolName
 
-local baseButton = hotbarFrame:FindFirstChild("5").Base
-local ToolName = baseButton.ToolName
+ToolName2.Text = "No more running anymore"
 
-ToolName.Text = "No more running anymore"
-
-local Tool = script.Parent
+local Tool2 = script.Parent
 local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
+local character2 = player.Character or player.CharacterAdded:Wait()
+local humanoid2 = character2:WaitForChild("Humanoid")
 
-local camera = game.Workspace.CurrentCamera
+local camera2 = game.Workspace.CurrentCamera
 
-Tool.Equipped:Connect(function()
+Tool2.Equipped:Connect(function()
     local closestPlayer = nil
     local closestDistance = math.huge
     
@@ -1227,7 +1223,7 @@ Tool.Equipped:Connect(function()
             local otherHumanoidRootPart = otherCharacter:FindFirstChild("HumanoidRootPart")
             
             if otherHumanoidRootPart then
-                local distance = (character.HumanoidRootPart.Position - otherHumanoidRootPart.Position).Magnitude
+                local distance = (character2.HumanoidRootPart.Position - otherHumanoidRootPart.Position).Magnitude
                 
                 if distance < closestDistance then
                     closestDistance = distance
@@ -1245,7 +1241,8 @@ Tool.Equipped:Connect(function()
             local armPosition = closestCharacter:FindFirstChild("RightUpperArm") and closestCharacter.RightUpperArm.Position or closestHumanoidRootPart.Position
             local teleportPosition = closestHumanoidRootPart.Position - (closestHumanoidRootPart.Position - armPosition).unit * 5
 
-            character:SetPrimaryPartCFrame(CFrame.new(teleportPosition))
+            character2:SetPrimaryPartCFrame(CFrame.new(teleportPosition))
         end
     end
 end)
+
