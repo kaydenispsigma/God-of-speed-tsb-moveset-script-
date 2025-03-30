@@ -17,7 +17,7 @@ Tool1.Equipped:Connect(function()
     local AnimAnim = Instance.new("Animation")
     AnimAnim.AnimationId = "rbxassetid://18897115785"
     Anim = humanoid:LoadAnimation(AnimAnim)
-    Anim.Looped = true  -- Ensures animation loops
+    Anim.Looped = true  
 
     Anim:Play()
     
@@ -26,7 +26,7 @@ Tool1.Equipped:Connect(function()
     movingConnection = game:GetService("RunService").Heartbeat:Connect(function()
         local direction = camera.CFrame.LookVector * Vector3.new(1, 0, 1)
         direction = direction.Unit
-        humanoid:Move(direction * humanoid.WalkSpeed, true)
+        rootPart.CFrame = rootPart.CFrame + (direction * 0.5) -- Moves 0.5 studs forward continuously
     end)
 end)
 
@@ -70,7 +70,7 @@ Tool2.Equipped:Connect(function()
         local closestRootPart = closestCharacter:FindFirstChild("HumanoidRootPart")
         
         if closestRootPart then
-            local behindPosition = closestRootPart.CFrame * CFrame.new(-2, 0, 3)  -- Teleport behind
+            local behindPosition = closestRootPart.CFrame * CFrame.new(-2, 0, 3)  
             rootPart.CFrame = behindPosition
         end
     end
