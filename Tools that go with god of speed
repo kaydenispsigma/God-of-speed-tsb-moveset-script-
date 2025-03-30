@@ -2,7 +2,6 @@ local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 local rootPart = character:WaitForChild("HumanoidRootPart")
-local camera = game.Workspace.CurrentCamera
 
 -- VanishingSpeed Tool
 local Tool1 = Instance.new("Tool")
@@ -18,15 +17,14 @@ Tool1.Equipped:Connect(function()
     AnimAnim.AnimationId = "rbxassetid://18897115785"
     Anim = humanoid:LoadAnimation(AnimAnim)
     Anim.Looped = true  
-
     Anim:Play()
     
     humanoid.WalkSpeed = 50
 
     movingConnection = game:GetService("RunService").Heartbeat:Connect(function()
-        local direction = camera.CFrame.LookVector * Vector3.new(1, 0, 1)
+        local direction = rootPart.CFrame.LookVector * Vector3.new(1, 0, 1) -- Moves in the player's facing direction
         direction = direction.Unit
-        rootPart.CFrame = rootPart.CFrame + (direction * 0.5) -- Moves 0.5 studs forward continuously
+        rootPart.CFrame = rootPart.CFrame + (direction * 5) -- Moves forward by **5 studs continuously**
     end)
 end)
 
@@ -70,7 +68,7 @@ Tool2.Equipped:Connect(function()
         local closestRootPart = closestCharacter:FindFirstChild("HumanoidRootPart")
         
         if closestRootPart then
-            local behindPosition = closestRootPart.CFrame * CFrame.new(-2, 0, 3)  
+            local behindPosition = closestRootPart.CFrame * CFrame.new(0, 0, 5)  
             rootPart.CFrame = behindPosition
         end
     end
