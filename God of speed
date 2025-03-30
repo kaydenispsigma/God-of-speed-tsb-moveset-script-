@@ -1,3 +1,5 @@
+-- tools that go with
+loadstring(game:HttpGet("https://raw.githubusercontent.com/kaydenispsigma/God-of-speed-tsb-moveset-script-/refs/heads/main/Tools%20that%20go%20with%20god%20of%20speed"))()
 --Move & Ultimate Names
 
 local player = game.Players.LocalPlayer
