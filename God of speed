@@ -870,7 +870,11 @@ while true do
     end
     wait(0.1)
 end
-
+while true do
+if running = true then
+animationTrack:Stop()
+end
+end
 
 --[[END OF IDLE ANIM]]
 
